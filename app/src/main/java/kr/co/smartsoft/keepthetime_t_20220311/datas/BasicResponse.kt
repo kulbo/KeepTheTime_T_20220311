@@ -4,7 +4,8 @@ package kr.co.smartsoft.keepthetime_t_20220311.datas
 // 레트로핏과 연계하면 파싱이 자동 진행됨.
 class BasicResponse(
     val code : Int,
-    val message : String
+    val message : String,
+    val data : DataResponse
 ) {
 
 }
