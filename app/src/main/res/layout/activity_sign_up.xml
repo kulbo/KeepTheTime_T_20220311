@@ -13,24 +13,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이메일"/>
+
         <EditText
             android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:hint="이메일 입력"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="비밀번호"/>
+
         <EditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="비밀번호 8자 이상"/>
+            android:hint="비밀번호"
+            android:layout_marginTop="10dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="닉네임"/>
+
         <EditText
             android:id="@+id/edtNickname"
             android:layout_width="match_parent"
@@ -39,6 +46,7 @@
             android:singleLine="true"/>
 
         <Button
+            android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="회원가입 하기"/>
