@@ -33,6 +33,16 @@ class SignInActivity : BaseActivity() {
                 override fun onResponse(call: Call<JSONObject>, response: Response<JSONObject>) {
 
                     Log.d("응답확인", response.toString())
+
+//                    retrobif 라이브러리의 response는 성공/실패 여부에 따라 다른 본문을 봐야함.
+//                    성공?
+                    if(response.isSuccessful) {
+
+                    }
+//                    실태일떄 - response.errorBody() 활용
+                    else {
+
+                    }
                 }
 
                 override fun onFailure(call: Call<JSONObject>, t: Throwable) {
