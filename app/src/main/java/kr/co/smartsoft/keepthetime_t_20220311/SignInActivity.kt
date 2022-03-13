@@ -1,5 +1,6 @@
 package kr.co.smartsoft.keepthetime_t_20220311
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,10 @@ class SignInActivity : BaseActivity() {
 
     override fun setUpEvents() {
 
+        binding.btnSignUp.setOnClickListener {
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+        }
         binding.btnLogin.setOnClickListener {
 
             val inputEmail = binding.edtEmail.text.toString()
