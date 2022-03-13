@@ -2,6 +2,8 @@ package kr.co.smartsoft.keepthetime_t_20220311
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.ActivitySignInBinding
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.ActivitySignUpBinding
 import kr.co.smartsoft.keepthetime_t_20220311.datas.BasicResponse
@@ -15,7 +17,7 @@ class SignUpActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
         setUpEvents()
         setValues()
     }
@@ -34,6 +36,10 @@ class SignUpActivity : BaseActivity() {
                     response: Response<BasicResponse>
                 ) {
 
+                    if (response.isSuccessful) {
+                        Toast.makeText(mContext, "회원가입에 성송했습니다!", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
                 }
 
                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
