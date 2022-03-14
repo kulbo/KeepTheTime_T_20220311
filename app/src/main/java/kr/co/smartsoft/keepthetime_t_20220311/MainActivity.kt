@@ -21,5 +21,7 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
+//        GET - /user 접근해서 내 정보 조회
+//        토큰값이 필요함. =>
     }
 }

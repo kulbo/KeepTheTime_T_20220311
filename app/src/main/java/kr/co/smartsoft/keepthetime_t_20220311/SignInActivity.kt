@@ -10,6 +10,7 @@ import kr.co.smartsoft.keepthetime_t_20220311.api.APIList
 import kr.co.smartsoft.keepthetime_t_20220311.api.ServerAPI
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.ActivitySignInBinding
 import kr.co.smartsoft.keepthetime_t_20220311.datas.BasicResponse
+import kr.co.smartsoft.keepthetime_t_20220311.utils.ContextUtil
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,6 +53,14 @@ class SignInActivity : BaseActivity() {
 //                        UI 조작을 위해 runOnUiThread { } 작성 필요 X.
                         Toast.makeText(mContext, "${br.data.user.nick_name}님 환영합니다.", Toast.LENGTH_SHORT).show()
 
+//                        서버가 내려주는
+                        ContextUtil.setLoginUserToken(mContext, br.data.token)
+
+//                        메인 화면으로 이동, 현재 화면 종료
+                        val myIntent = Intent(mContext, MainActivity::class.java)
+                        startActivity(myIntent)
+
+                        finish()
                     }
 //                    실태일떄 - response.errorBody() 활용
                     else {
