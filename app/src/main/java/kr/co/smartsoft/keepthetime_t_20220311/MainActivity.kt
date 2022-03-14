@@ -33,5 +33,7 @@ class MainActivity : BaseActivity() {
 //        토큰값이 필요함. =>
         mAdapter = MainViewPagerAdapter(supportFragmentManager)
         binding.mainViewPager.adapter = mAdapter
+
+
     }
 }
