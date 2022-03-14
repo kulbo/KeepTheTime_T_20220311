@@ -32,7 +32,10 @@ class MainActivity : BaseActivity() {
         apiList.getRequestMyInfo(ContextUtil.getLoginUserToken(mContext)).enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 //            JSON 응답을 서버에서 보고 파싱부터
-
+                if (response.isSuccessful) {
+                    val br = response.body()!!
+                    binding.txtViewNickname.text = br.data.user.nick_name
+                }
             }
 
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
