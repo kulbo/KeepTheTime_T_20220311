@@ -6,7 +6,8 @@ package kr.co.smartsoft.keepthetime_t_20220311.datas
 
 class DataResponse(
     val user : UserData,
-    val token : String
+    val token : String,
+    val friends: List<UserData>,    // 친구목록을 가져올때
 
 ) {
 
