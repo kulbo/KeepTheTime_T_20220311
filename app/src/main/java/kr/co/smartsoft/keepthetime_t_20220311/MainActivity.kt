@@ -31,6 +31,7 @@ class MainActivity : BaseActivity() {
 
         apiList.getRequestMyInfo(ContextUtil.getLoginUserToken(mContext)).enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+//            JSON 응답을 서버에서 보고 파싱부터
 
             }
 
