@@ -34,6 +34,6 @@ class MainActivity : BaseActivity() {
         mAdapter = MainViewPagerAdapter(supportFragmentManager)
         binding.mainViewPager.adapter = mAdapter
 
-
+        binding.mainTabLayout.setupWithViewPager(binding.mainViewPager)
     }
 }
