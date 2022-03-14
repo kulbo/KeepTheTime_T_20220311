@@ -1,5 +1,8 @@
 package kr.co.smartsoft.keepthetime_t_20220311.fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import kr.co.smartsoft.keepthetime_t_20220311.R
+import kr.co.smartsoft.keepthetime_t_20220311.SplashActivity
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.FragmentMyProfileBinding
 import kr.co.smartsoft.keepthetime_t_20220311.datas.BasicResponse
 import kr.co.smartsoft.keepthetime_t_20220311.utils.ContextUtil
@@ -36,6 +40,24 @@ class MyProfileFragment : BaseFragment() {
 
     override fun setupEvents() {
 
+        binding.btnLogout.setOnClickListener {
+            val alert = AlertDialog.Builder(mContext)
+                .setTitle("로그아웃")
+                .setMessage("정말 로그아웃")
+                .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+//                    실제 로그아웃 처리 => 저장된 토큰을 초기화
+                    ContextUtil.setLoginUserToken(mContext, "")
+//                    로딩화면 복귀
+                    val myIntent = Intent(mContext, SplashActivity::class.java)
+
+                    myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                    startActivity(myIntent)
+
+                })
+                .setNegativeButton("취소", null)
+                .show()
+        }
     }
 
     override fun setValues() {
