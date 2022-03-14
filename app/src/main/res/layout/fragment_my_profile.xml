@@ -11,6 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginBottom="20dp"
             android:gravity="center">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -24,31 +25,81 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:layout_marginTop="5dp">
+
                 <ImageView
                     android:layout_width="20dp"
-
                     android:layout_height="20dp"
                     android:src="@mipmap/ic_launcher"/>
+
                 <TextView
                     android:id="@+id/txtNickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="닉네임"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btnLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="로그아웃"/>
+                    android:layout_marginStart="3dp"
+                    android:textColor="@color/black"
+                    android:text="사용자 닉네임"/>
 
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightgray"/>
+
+        <LinearLayout
+            android:id="@+id/btnManageMyFrients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="친구 목록 관리"
+                android:textColor="@color/black"
+                android:textSize="17sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/right_error"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textColor="@color/lightgray" />
+
+        <LinearLayout
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="5dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그아웃"
+                android:textColor="@color/black"
+                android:textSize="17sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textColor="@color/lightgray" />
+
     </LinearLayout>
 </layout>

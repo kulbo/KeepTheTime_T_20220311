@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import kr.co.smartsoft.keepthetime_t_20220311.ManageMyFriendsActivity
 import kr.co.smartsoft.keepthetime_t_20220311.R
 import kr.co.smartsoft.keepthetime_t_20220311.SplashActivity
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.FragmentMyProfileBinding
@@ -40,6 +41,10 @@ class MyProfileFragment : BaseFragment() {
 
     override fun setupEvents() {
 
+        binding.btnManageMyFrients.setOnClickListener {
+            val myIntent = Intent(mContext, ManageMyFriendsActivity::class.java)
+            startActivity(myIntent)
+        }
         binding.btnLogout.setOnClickListener {
             val alert = AlertDialog.Builder(mContext)
                 .setTitle("로그아웃")
