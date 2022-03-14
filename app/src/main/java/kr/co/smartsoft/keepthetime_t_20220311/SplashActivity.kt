@@ -30,7 +30,7 @@ class SplashActivity : BaseActivity() {
         apiList.getRequestMyInfo(ContextUtil.getLoginUserToken(mContext)).enqueue(object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
-
+                    isMyInfoLoaded = true       // 토큰이 있으면 MainActivity 로 이동
                 }
             }
 
