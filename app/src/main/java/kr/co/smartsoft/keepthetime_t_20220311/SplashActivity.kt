@@ -48,7 +48,7 @@ class SplashActivity : BaseActivity() {
             if(isMyInfoLoaded) {
                 myIntent = Intent(mContext, MainActivity::class.java)
             } else{
-                myIntent = Intent(mContext, MainActivity::class.java)
+                myIntent = Intent(mContext, SignInActivity::class.java)
             }
             startActivity(myIntent)
 

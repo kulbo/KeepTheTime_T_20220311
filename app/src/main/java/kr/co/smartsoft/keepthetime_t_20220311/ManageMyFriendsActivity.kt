@@ -1,8 +1,7 @@
 package kr.co.smartsoft.keepthetime_t_20220311
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Adapter
 import androidx.databinding.DataBindingUtil
 import kr.co.smartsoft.keepthetime_t_20220311.adapters.MyFriendAdapter
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.ActivityManageMyFriendsBinding
@@ -30,6 +29,10 @@ class ManageMyFriendsActivity : BaseActivity() {
 
     override fun setUpEvents() {
 
+        binding.btnAddFriend.setOnClickListener {
+            val myIntent = Intent(mContext, SearchUserActivity::class.java)
+            startActivity(myIntent)
+        }
 
     }
 
@@ -37,6 +40,7 @@ class ManageMyFriendsActivity : BaseActivity() {
         getMyFriendListFromServer()
 
         mAdapter = MyFriendAdapter(mContext, R.layout.activity_manage_my_friends, mFriendList)
+        binding.myFriendsListView.adapter = mAdapter
 
     }
 
