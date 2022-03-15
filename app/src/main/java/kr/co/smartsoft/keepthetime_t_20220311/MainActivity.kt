@@ -3,6 +3,7 @@ package kr.co.smartsoft.keepthetime_t_20220311
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.viewpager2.widget.ViewPager2
 import kr.co.smartsoft.keepthetime_t_20220311.adapters.MainViewPager2Adapter
 import kr.co.smartsoft.keepthetime_t_20220311.adapters.MainViewPagerAdapter
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.ActivityMainBinding
@@ -36,6 +37,18 @@ class MainActivity : BaseActivity() {
             return@setOnItemSelectedListener true
         }    //        뷰페이저의 페이지 이동
 
+        binding.mainViewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+//            이벤트처리 함수를 직접 오버라이딩
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                binding.btnBottomNav.selectedItemId = when(position) {
+                    0 -> R.id.myAppointment
+                    else -> R.id.myProfile
+                }
+            }
+        })
     }
 
     override fun setValues() {
