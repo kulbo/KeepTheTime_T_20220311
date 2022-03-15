@@ -31,6 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="16sp"
                 android:background="@drawable/light_gray_border_box"
                 android:text="약속 일자"/>
             <TextView
@@ -39,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textSize="16sp"
                 android:background="@drawable/light_gray_border_box"
                 android:text="약속 시간"/>
 
