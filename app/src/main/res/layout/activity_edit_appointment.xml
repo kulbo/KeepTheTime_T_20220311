@@ -31,6 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:textSize="16sp"
                 android:background="@drawable/light_gray_border_box"
                 android:text="약속 일자"/>
@@ -45,6 +46,23 @@
                 android:text="약속 시간"/>
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="약속 장소"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/edtPlaceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="장소 입력"/>
+
+        <com.naver.maps.map.MapView
+            android:id="@+id/naverMapView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"/>
         <Button
             android:id="@+id/btnSave"
             android:layout_marginTop="5dp"
