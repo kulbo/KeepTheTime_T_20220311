@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -29,8 +30,8 @@ class RequestUserRecyclerAdapter(
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
         val imgSocialLoginLogo = view.findViewById<ImageView>(R.id.imgSocialLoginLogo)
         val txtEmail = view.findViewById<TextView>(R.id.txtEmail)
-        val btnAccept = view.findViewById<TextView>(R.id.btnAccept)
-        val btnDeny = view.findViewById<TextView>(R.id.btnDeny)
+        val btnAccept = view.findViewById<Button>(R.id.btnAccept)
+        val btnDeny = view.findViewById<Button>(R.id.btnDeny)
 
         fun bind(data: UserData) {
             Glide.with(mContext).load(data.profile_img).into(imgProfile)
