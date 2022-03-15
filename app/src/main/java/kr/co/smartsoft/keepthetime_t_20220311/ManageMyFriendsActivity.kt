@@ -3,6 +3,7 @@ package kr.co.smartsoft.keepthetime_t_20220311
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import kr.co.smartsoft.keepthetime_t_20220311.adapters.FriendViewPagerAdapter
 import kr.co.smartsoft.keepthetime_t_20220311.adapters.MyFriendAdapter
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.ActivityManageMyFriendsBinding
 import kr.co.smartsoft.keepthetime_t_20220311.datas.BasicResponse
@@ -15,9 +16,9 @@ import retrofit2.Response
 class ManageMyFriendsActivity : BaseActivity() {
     lateinit var binding : ActivityManageMyFriendsBinding
 
-    lateinit var mAdapter : MyFriendAdapter
+    lateinit var mAdapter : FriendViewPagerAdapter
 
-//    val mFriendList = ArrayList<UserData>()
+    val mFriendList = ArrayList<UserData>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,32 +38,11 @@ class ManageMyFriendsActivity : BaseActivity() {
     }
 
     override fun setValues() {
-//        getMyFriendListFromServer()
+        mAdapter = FriendViewPagerAdapter(supportFragmentManager)
+        binding.friendViewPager.adapter = mAdapter
 
-//        mAdapter = MyFriendAdapter(mContext, R.layout.activity_manage_my_friends, mFriendList)
-//        binding.myFriendsListView.adapter = mAdapter
-
+        binding.friendsTabLayout.setupWithViewPager(binding.friendViewPager)
 
     }
 
-    fun getMyFriendListFromServer() {
-        apiList.getRequestFriendList(
-            "my"
-        ).enqueue(object :Callback<BasicResponse>{
-            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-                if (response.isSuccessful) {
-                    val br = response.body()!!
-
-//                    mFriendList.addAll(br.data.friends)
-
-                    mAdapter.notifyDataSetChanged()
-                }
-            }
-
-            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
-            }
-
-        })
-    }
 }
