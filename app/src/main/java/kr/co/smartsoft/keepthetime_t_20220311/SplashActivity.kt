@@ -40,6 +40,7 @@ class SplashActivity : BaseActivity() {
 
         })
 //      임시 - 2.5초 후에 무조건 로그인
+//      앱에서 사용자 정보를 가져오는 데 필요한 시간을 지연시키기 위한 함수
         val myHandler = Handler(Looper.getMainLooper())
 
         myHandler.postDelayed( {

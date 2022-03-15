@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.co.smartsoft.keepthetime_t_20220311.R
+import kr.co.smartsoft.keepthetime_t_20220311.api.APIList
+import kr.co.smartsoft.keepthetime_t_20220311.api.ServerAPI
 import kr.co.smartsoft.keepthetime_t_20220311.datas.UserData
 
 class SearchedUserRecyclerAdapter(
@@ -49,6 +51,11 @@ class SearchedUserRecyclerAdapter(
                     txtEmail.text = "네이버로그인"
                 }
             }
+
+            val retrofit = ServerAPI.getRetrofit()
+            val apiList = retrofit.create(APIList::class.java)
+
+//            apiList.??
         }
     }
 
