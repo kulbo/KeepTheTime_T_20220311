@@ -18,7 +18,6 @@ class ManageMyFriendsActivity : BaseActivity() {
 
     lateinit var mAdapter : FriendViewPagerAdapter
 
-    val mFriendList = ArrayList<UserData>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

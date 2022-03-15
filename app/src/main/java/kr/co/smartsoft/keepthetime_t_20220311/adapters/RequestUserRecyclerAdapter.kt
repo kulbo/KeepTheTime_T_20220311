@@ -99,15 +99,15 @@ class RequestUserRecyclerAdapter(
             }
 
 
-            // 요청자가 없을 때 앱이 종료되어 임시로 막음
-//            btnAccept.setOnClickListener(ocl)
-//            btnDeny.setOnClickListener(ocl)
+            // 요청자가 있을 때 앱이 종료되어 임시로 막음
+            btnAccept.setOnClickListener(ocl)
+            btnDeny.setOnClickListener(ocl)
 
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.my_friend_list_item, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.request_user_list_item, parent, false)
         return MyViewHolder(view)
     }
 
