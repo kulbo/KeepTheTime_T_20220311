@@ -21,7 +21,7 @@ class ServerAPI {
         private var retrofit : Retrofit? = null
         private val BASE_URL = "https://keepthetime.xyz"
 
-        fun getRetrofit(contest:Context) : Retrofit {
+        fun getRetrofit(context:Context) : Retrofit {
 
 //            Retrofit 라이브러리는 클래스 차원에서 BASE_URL 을 설정할 수 있게 도와줌
 //            Retrofit + Gson 두개의 라이브러리를 결합하면 => JSON 파싱이  쉽다
@@ -35,7 +35,7 @@ class ServerAPI {
                     with(it) {
 //                        기존의 request에 헤더를 추가
                         val newRequest = request().newBuilder()
-                            .addHeader("X-Http-Token", ContextUtil.getLoginUserToken())
+                            .addHeader("X-Http-Token", ContextUtil.getLoginUserToken(context))
                             .build()
 
                         proceed(newRequest)
