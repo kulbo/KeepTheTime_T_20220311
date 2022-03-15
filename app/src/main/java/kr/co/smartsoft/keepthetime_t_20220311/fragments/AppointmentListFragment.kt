@@ -31,6 +31,5 @@ class AppointmentListFragment : BaseFragment() {
 
     override fun setValues() {
 
-        binding.txtTest.text = "코틀린에서 문구 바꾸기"
     }
 }
