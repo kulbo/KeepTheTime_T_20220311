@@ -52,6 +52,7 @@ class SplashActivity : BaseActivity() {
                 myIntent = Intent(mContext, SignInActivity::class.java)
             }
             startActivity(myIntent)
+            finish()
 
         }, 2500)
 

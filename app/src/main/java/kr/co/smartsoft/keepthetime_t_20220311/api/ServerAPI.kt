@@ -50,6 +50,7 @@ class ServerAPI {
                 retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)      // 어느 서버를 기반으로 움직일 것인지.
                     .addConverterFactory(GsonConverterFactory.create()) // gson 라이브러리와 결합
+                    .client(myClient)       // 토큰을 지정하도록 수정
                     .build()
             }
 
