@@ -30,7 +30,6 @@ interface APIList {
 //    내정보 조회
     @GET("/user")
     fun getRequestMyInfo(
-        @Header("X-Http-Token") token: String
     ) : Call<BasicResponse>
 
 //    중복검사
@@ -43,14 +42,26 @@ interface APIList {
 //    내 친구 목록 조회하기
     @GET("/user/friend")
     fun getRequestFriendList(
-        @Header("X-Http-Token") token: String,
         @Query("type") type:String
     ) : Call<BasicResponse>
 
 //    사용자 닉네임으로 검색하기
     @GET("/search/user")
     fun getRequestSearchUser(
-        @Header("X-Http-Token") token: String,
         @Query("nickname") nickname: String,
     ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @POST("/user/friend")
+    fun postRequestAddFriend(
+        @Field("user_id") userId : String,
+    ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @PUT("/user/friend")
+    fun putRequestAceeptOrDenyFriend(
+        @Field("user_id") userId : Int,
+        @Field("type") type : String,
+    ) : Call<BasicResponse>
+
 }

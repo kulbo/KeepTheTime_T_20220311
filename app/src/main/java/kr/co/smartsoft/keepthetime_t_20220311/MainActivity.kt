@@ -3,6 +3,7 @@ package kr.co.smartsoft.keepthetime_t_20220311
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import kr.co.smartsoft.keepthetime_t_20220311.adapters.MainViewPager2Adapter
 import kr.co.smartsoft.keepthetime_t_20220311.adapters.MainViewPagerAdapter
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.ActivityMainBinding
 import kr.co.smartsoft.keepthetime_t_20220311.datas.BasicResponse
@@ -25,15 +26,21 @@ class MainActivity : BaseActivity() {
 
     override fun setUpEvents() {
 
+//        바텀 네비게이션의 메뉴 선택 > 뷰페이져의 페이지 이동
+        binding.btnBottomNav.setOnItemSelectedListener {
+//            어떤 메뉴가 선택되었는지? it 변수가 알려줌.
+            when(it.itemId) {
+                R.id.myAppointment -> binding.mainViewPager2.currentItem = 0
+                R.id.myProfile -> binding.mainViewPager2.currentItem = 1
+            }
+            return@setOnItemSelectedListener true
+        }    //        뷰페이저의 페이지 이동
+
     }
 
     override fun setValues() {
 
-//        GET - /user 접근해서 내 정보 조회
-//        토큰값이 필요함. =>
-        mAdapter = MainViewPagerAdapter(supportFragmentManager)
-        binding.mainViewPager.adapter = mAdapter
+        binding.mainViewPager2.adapter = MainViewPager2Adapter(this)    // 변수 : Activity => 객체
 
-        binding.mainTabLayout.setupWithViewPager(binding.mainViewPager)
     }
 }

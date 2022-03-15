@@ -16,7 +16,7 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mContext = this
 
-        val retrofit = ServerAPI.getRetrofit()
+        val retrofit = ServerAPI.getRetrofit(mContext)
         apiList = retrofit.create(APIList::class.java)      // apiList의 양식에 retrofit의 통신기능 사용할 수 있도록 연결
     }
     abstract fun setUpEvents()

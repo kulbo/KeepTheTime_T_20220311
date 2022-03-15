@@ -17,7 +17,7 @@ class ManageMyFriendsActivity : BaseActivity() {
 
     lateinit var mAdapter : MyFriendAdapter
 
-    val mFriendList = ArrayList<UserData>()
+//    val mFriendList = ArrayList<UserData>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,23 +37,23 @@ class ManageMyFriendsActivity : BaseActivity() {
     }
 
     override fun setValues() {
-        getMyFriendListFromServer()
+//        getMyFriendListFromServer()
 
-        mAdapter = MyFriendAdapter(mContext, R.layout.activity_manage_my_friends, mFriendList)
-        binding.myFriendsListView.adapter = mAdapter
+//        mAdapter = MyFriendAdapter(mContext, R.layout.activity_manage_my_friends, mFriendList)
+//        binding.myFriendsListView.adapter = mAdapter
+
 
     }
 
     fun getMyFriendListFromServer() {
         apiList.getRequestFriendList(
-            ContextUtil.getLoginUserToken(mContext),
             "my"
         ).enqueue(object :Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
                     val br = response.body()!!
 
-                    mFriendList.addAll(br.data.friends)
+//                    mFriendList.addAll(br.data.friends)
 
                     mAdapter.notifyDataSetChanged()
                 }
