@@ -54,7 +54,7 @@ interface APIList {
     @FormUrlEncoded
     @POST("/user/friend")
     fun postRequestAddFriend(
-        @Field("user_id") userId : String,
+        @Field("user_id") userId : Int,
     ) : Call<BasicResponse>
 
     @FormUrlEncoded

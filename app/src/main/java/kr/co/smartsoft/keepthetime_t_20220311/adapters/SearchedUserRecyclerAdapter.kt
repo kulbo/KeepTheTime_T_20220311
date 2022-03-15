@@ -31,9 +31,8 @@ class SearchedUserRecyclerAdapter(
         val txtEmail = view.findViewById<TextView>(R.id.txtEmail)
         val btnAddFriend = view.findViewById<TextView>(R.id.btnAddFriend)
 
-        fun bind(data:UserData) {
+        fun bind(data : UserData) {
             txtNickname.text = data.nick_name
-            txtEmail.text = data.email
             Glide.with(mConText).load(data.profile_img).into(imgProfile)
             when(data.provider) {
                 "default" -> {
@@ -42,39 +41,41 @@ class SearchedUserRecyclerAdapter(
                 }
                 "kakao" -> {
                     imgSocialLoginLog.visibility = View.VISIBLE
-                    //imgSocialLoginLog.setImageResource(R.drawable)
+                    imgSocialLoginLog.setImageResource(R.drawable.kakao)
                     txtEmail.text = "카카오로그인"
                 }
                 "fasebook" -> {
                     imgSocialLoginLog.visibility = View.VISIBLE
-                    //imgSocialLoginLog.setImageResource(R.drawable)
+                    imgSocialLoginLog.setImageResource(R.drawable.facebook)
                     txtEmail.text = "페북 로그인"
                 }
                 "naver" -> {
                     imgSocialLoginLog.visibility = View.VISIBLE
-                    //imgSocialLoginLog.setImageResource(R.drawable)
+                    imgSocialLoginLog.setImageResource(R.drawable.naver)
                     txtEmail.text = "네이버로그인"
                 }
             }
 
-            val retrofit = ServerAPI.getRetrofit(mConText)
-            val apiList = retrofit.create(APIList::class.java)
+            btnAddFriend.setOnClickListener {
+                val retrofit = ServerAPI.getRetrofit(mConText)
+                val apiList = retrofit.create(APIList::class.java)
 
-            apiList.postRequestAddFriend(data.id.toString()).enqueue(object : Callback<BasicResponse>{
-                override fun onResponse(
-                    call: Call<BasicResponse>,
-                    response: Response<BasicResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(mConText, "친구요청을 보냈습니다.", Toast.LENGTH_SHORT).show()
+                apiList.postRequestAddFriend(data.id).enqueue(object : Callback<BasicResponse>{
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(mConText, "친구요청을 보냈습니다.", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
-                }
+                    }
 
-            })
+                })
+            }
         }
     }
 
@@ -94,7 +95,7 @@ class SearchedUserRecyclerAdapter(
         val data = mList[position]
 //        이 함수에서 직접 코딩하면 => holder.UI 변수로 매번 holder 단어를 쎠야함
 //        holder 변수
-
+        holder.bind(data)
     }
 
 //    몇개의 아이템을 보여줄 예정인가? => 데이터목록의 갯수만큼.
