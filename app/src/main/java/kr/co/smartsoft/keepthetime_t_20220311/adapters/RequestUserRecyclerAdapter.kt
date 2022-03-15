@@ -97,8 +97,10 @@ class RequestUserRecyclerAdapter(
 
             }
 
-            btnAccept.setOnClickListener(ocl)
-            btnDeny.setOnClickListener(ocl)
+
+            // 요청자가 없을 때 앱이 종료되어 임시로 막음
+//            btnAccept.setOnClickListener(ocl)
+//            btnDeny.setOnClickListener(ocl)
 
         }
     }

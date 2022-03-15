@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.smartsoft.keepthetime_t_20220311.R
 import kr.co.smartsoft.keepthetime_t_20220311.adapters.MyFriendRecyclerAdapter
 import kr.co.smartsoft.keepthetime_t_20220311.adapters.RequestUserRecyclerAdapter
@@ -42,6 +43,12 @@ class RequestedtUsersFragment : BaseFragment() {
     }
 
     override fun setValues() {
+        mAdapter = RequestUserRecyclerAdapter(mContext, mRequestedUsersList)
+        binding.requestedRecyclerView.adapter = mAdapter
+
+        binding.requestedRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
+        getRequestedUsersFromServer()
 
     }
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.smartsoft.keepthetime_t_20220311.R
 import kr.co.smartsoft.keepthetime_t_20220311.adapters.MyFriendRecyclerAdapter
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.FragmentMyFriendsBinding
@@ -41,7 +42,10 @@ class MyFiendsFragment : BaseFragment() {
 
     override fun setValues() {
         mFriendAdapter = MyFriendRecyclerAdapter(mContext, mMyFriendList)
-//        binding.myF
+        binding.myFriendsRecyclerView.adapter = mFriendAdapter
+        binding.myFriendsRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
+        getMyFriendsFromServer()
 
     }
 
