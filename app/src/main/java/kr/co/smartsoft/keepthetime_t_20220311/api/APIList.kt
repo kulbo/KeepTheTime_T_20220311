@@ -75,8 +75,6 @@ interface APIList {
     ) : Call<BasicResponse>
 
     //    내 친구 목록 조회하기
-    @GET("/user/friend")
-    fun getRequestAppointmentList(
-        @Query("date") date : String
-    ) : Call<BasicResponse>
+    @GET("/appointment")
+    fun getRequestAppointmentList() : Call<BasicResponse>
 }

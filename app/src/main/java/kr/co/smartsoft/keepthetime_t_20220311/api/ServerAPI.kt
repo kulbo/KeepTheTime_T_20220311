@@ -1,11 +1,13 @@
 package kr.co.smartsoft.keepthetime_t_20220311.api
 
 import android.content.Context
+import com.google.gson.GsonBuilder
 import kr.co.smartsoft.keepthetime_t_20220311.utils.ContextUtil
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class ServerAPI {
 
@@ -47,9 +49,17 @@ class ServerAPI {
                     .addInterceptor(intercepter)
                     .build()
 
+                val gson = GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .registerTypeAdapter(
+                        Date::class.java,
+                        DateDeserializer()
+                    )
+                    .create()
+
                 retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)      // 어느 서버를 기반으로 움직일 것인지.
-                    .addConverterFactory(GsonConverterFactory.create()) // gson 라이브러리와 결합
+                    .addConverterFactory(GsonConverterFactory.create(gson)) // gson 라이브러리와 결합
                     .client(myClient)       // 토큰을 지정하도록 수정
                     .build()
             }
