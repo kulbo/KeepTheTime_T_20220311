@@ -37,17 +37,51 @@ class EditAppointmentActivity : BaseActivity() {
 
     override fun setUpEvents() {
         binding.btnSave.setOnClickListener {
+//            입력값들이 제대로 되어있는지 확인 => 잘못되다면 막아주장
+            val inputTitle = binding.edtTitle.text.toString()
+//            입력하지 않았다면 거부
+//            시간을 선택하지 않았다면 막자
+//            기준? txtDate, txtTime 처음 문구 와 동일하면 입력이
+            if (inputTitle.isEmpty()) {
+                Toast.makeText(mContext, "제목을 입력해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (binding.txtDate.text == "약속 일자") {
+                Toast.makeText(mContext, "일자선택요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (binding.txtDate.text == "약속 시간") {
+                Toast.makeText(mContext, "시간선택요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+//            선택한 일시가 현재 이전으로 선택하면
+            val now = Calendar.getInstance()
+            if (mSelectedAppointmentDateTime.timeInMillis < now.timeInMillis) {
+                Toast.makeText(mContext, "현재 이후의 시간으로 선택해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val inputPlaceName = binding.edtPlaceName.text.toString()
+            if (inputPlaceName == null) {
+                Toast.makeText(mContext, "약소장소를 입력해 주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             if (mSeletedLatLng == null) {
                 Toast.makeText(mContext, "약속 장소를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
             Log.d("선택한약속장고 - 위도", "위도 : ${mSeletedLatLng!!.latitude}")
             Log.d("선택한약속장고 - 위도", "위도 : ${mSeletedLatLng!!.longitude}")
 
             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
 
             apiList.postRequestAddAppointment(
-                binding.edtTitle.text.toString(),
+                inputTitle,
                 sdf.format(mSelectedAppointmentDateTime.time),
                 binding.edtPlaceName.text.toString(),
                 mSeletedLatLng!!.latitude,
@@ -57,7 +91,10 @@ class EditAppointmentActivity : BaseActivity() {
                     call: Call<BasicResponse>,
                     response: Response<BasicResponse>
                 ) {
-
+                    if (response.isSuccessful) {
+                        Toast.makeText(mContext, "약속을 등록했습니다.", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
                 }
 
                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
