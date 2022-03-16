@@ -37,16 +37,19 @@ class MyFriendRecyclerAdapter(
                     imgSocialLoginLogo.visibility = View.VISIBLE
                     //imgSocialLoginLog.setImageResource(R.drawable)
                     txtEmail.text = "카카오로그인"
+                    Glide.with(mContext).load(R.drawable.kakao).into(imgSocialLoginLogo)
                 }
                 "fasebook" -> {
                     imgSocialLoginLogo.visibility = View.VISIBLE
                     //imgSocialLoginLog.setImageResource(R.drawable)
                     txtEmail.text = "페북 로그인"
+                    Glide.with(mContext).load(R.drawable.facebook).into(imgSocialLoginLogo)
                 }
                 "naver" -> {
                     imgSocialLoginLogo.visibility = View.VISIBLE
                     //imgSocialLoginLog.setImageResource(R.drawable)
                     txtEmail.text = "네이버로그인"
+                    Glide.with(mContext).load(R.drawable.naver).into(imgSocialLoginLogo)
                 }
                 else -> {
 //                    그 외의 작업

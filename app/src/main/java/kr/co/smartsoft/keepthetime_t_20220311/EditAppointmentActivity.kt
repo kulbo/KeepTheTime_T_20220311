@@ -116,14 +116,19 @@ class EditAppointmentActivity : BaseActivity() {
             val cameraUpdate = CameraUpdate.scrollTo(coord)
             naverMap.moveCamera(cameraUpdate)
 
-            marker = Marker()
-            marker!!.position = coord
-            marker!!.map = naverMap
-
-            mSeletedLatLng = coord
+//            첫 마커 좌표 => 학원 위치 null
+//            marker = Marker()
+//            marker!!.position = coord
+//            marker!!.map = naverMap
+//
+//            mSeletedLatLng = coord
             
             naverMap.setOnMapClickListener { pointF, latLng ->
-                Log.d("크릭된 위/경도", "위도 : ${latLng.latitude}, 경도 : ${latLng.longitude}")
+//                 Log.d("크릭된 위/경도", "위도 : ${latLng.latitude}, 경도 : ${latLng.longitude}")
+//
+                if (marker == null) {
+                    marker = Marker()
+                }
                 marker!!.position = latLng
                 marker!!.map = naverMap
 //                약속 장소도 새 좌표로 설정ㅅ
