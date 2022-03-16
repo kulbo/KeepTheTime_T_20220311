@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.smartsoft.keepthetime_t_20220311.EditAppointmentActivity
 import kr.co.smartsoft.keepthetime_t_20220311.R
 import kr.co.smartsoft.keepthetime_t_20220311.adapters.AppointmentRecyclerAdapter
+import kr.co.smartsoft.keepthetime_t_20220311.adapters.RequestUserRecyclerAdapter
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.FragmentAppointmentListBinding
 import kr.co.smartsoft.keepthetime_t_20220311.datas.AppointmentData
 import kr.co.smartsoft.keepthetime_t_20220311.datas.BasicResponse
+import kr.co.smartsoft.keepthetime_t_20220311.datas.UserData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,9 +23,9 @@ class AppointmentListFragment : BaseFragment() {
 
     lateinit var binding : FragmentAppointmentListBinding
 
-    val mAppointList = ArrayList<AppointmentData>()
+    val mAppointmentList = ArrayList<AppointmentData>()
 
-    lateinit var mAppointmentAdapter: AppointmentListFragment
+    lateinit var mAppointmentAdapter: AppointmentRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,11 +51,17 @@ class AppointmentListFragment : BaseFragment() {
 
     override fun setValues() {
 
-        getAppointmentListFromServer()
+//        getAppointmentListFromServer()
 
-        mAppointmentAdapter = AppointmentRecyclerAdapter()
+        mAppointmentAdapter = AppointmentRecyclerAdapter(mContext, mAppointmentList)
         binding.appointmentRecyclerView.adapter = mAppointmentAdapter
         binding.appointmentRecyclerView.layoutManager = LinearLayoutManager(mContext)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        getAppointmentListFromServer()
     }
 
     fun getAppointmentListFromServer() {
@@ -61,11 +69,11 @@ class AppointmentListFragment : BaseFragment() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
                 if (response.isSuccessful) {
+                    mAppointmentList.clear()
                     val br = response.body()!!
 
-                    mAppointList.addAll(br.data.appointments)
-
-                    mAppointmentAdapter.no
+                    mAppointmentList.addAll(br.data.appointments)
+                    mAppointmentAdapter.notifyDataSetChanged()
                 }
             }
 

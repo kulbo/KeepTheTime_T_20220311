@@ -1,6 +1,7 @@
 package kr.co.smartsoft.keepthetime_t_20220311.api
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.GsonBuilder
 import kr.co.smartsoft.keepthetime_t_20220311.utils.ContextUtil
 import okhttp3.Interceptor
@@ -62,6 +63,7 @@ class ServerAPI {
                     .addConverterFactory(GsonConverterFactory.create(gson)) // gson 라이브러리와 결합
                     .client(myClient)       // 토큰을 지정하도록 수정
                     .build()
+
             }
 
             return retrofit!!

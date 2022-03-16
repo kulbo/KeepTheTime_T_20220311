@@ -68,10 +68,10 @@ interface APIList {
     @POST("/appointment")
     fun postRequestAddAppointment(
         @Field("title") title : String,
-        @Field("date_time") datatime : String,
+        @Field("datetime") datetime : String,
         @Field("place") place : String,
-        @Field("latitude") latitude : Double,
-        @Field("longtitude") longtitute : Double,
+        @Field("latitude") lat : Double,
+        @Field("longitude") lng : Double,
     ) : Call<BasicResponse>
 
     //    내 친구 목록 조회하기

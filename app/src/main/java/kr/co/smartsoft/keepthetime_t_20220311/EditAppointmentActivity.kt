@@ -10,12 +10,19 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.PathOverlay
+import com.odsay.odsayandroidsdk.API
+import com.odsay.odsayandroidsdk.ODsayData
+import com.odsay.odsayandroidsdk.ODsayService
+import com.odsay.odsayandroidsdk.OnResultCallbackListener
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.ActivityEditAppointmentBinding
 import kr.co.smartsoft.keepthetime_t_20220311.datas.BasicResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.nio.file.Path
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,6 +30,8 @@ class EditAppointmentActivity : BaseActivity() {
     lateinit var binding : ActivityEditAppointmentBinding
 
     var marker : Marker? = null
+
+    var path: PathOverlay? = null
 
     var mSeletedLatLng : LatLng? = null
 
@@ -75,17 +84,20 @@ class EditAppointmentActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            Log.d("선택한약속장고 - 위도", "위도 : ${mSeletedLatLng!!.latitude}")
-            Log.d("선택한약속장고 - 위도", "위도 : ${mSeletedLatLng!!.longitude}")
+            val lat = mSeletedLatLng!!.latitude
+            val lon = mSeletedLatLng!!.longitude
+            Log.d("선택한약속장소 - 위도", "위도 : ${lat}")
+            Log.d("선택한약속장소 - 위도", "위도 : ${lon}")
 
             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            val sdt = sdf.format(mSelectedAppointmentDateTime.time)
 
             apiList.postRequestAddAppointment(
                 inputTitle,
-                sdf.format(mSelectedAppointmentDateTime.time),
-                binding.edtPlaceName.text.toString(),
-                mSeletedLatLng!!.latitude,
-                mSeletedLatLng!!.longitude
+                sdt,
+                inputPlaceName,
+                lat,
+                lon
             ).enqueue(object : Callback<BasicResponse> {
                 override fun onResponse(
                     call: Call<BasicResponse>,
@@ -153,13 +165,6 @@ class EditAppointmentActivity : BaseActivity() {
             val cameraUpdate = CameraUpdate.scrollTo(coord)
             naverMap.moveCamera(cameraUpdate)
 
-//            첫 마커 좌표 => 학원 위치 null
-//            marker = Marker()
-//            marker!!.position = coord
-//            marker!!.map = naverMap
-//
-//            mSeletedLatLng = coord
-            
             naverMap.setOnMapClickListener { pointF, latLng ->
 //                 Log.d("크릭된 위/경도", "위도 : ${latLng.latitude}, 경도 : ${latLng.longitude}")
 //
@@ -170,8 +175,78 @@ class EditAppointmentActivity : BaseActivity() {
                 marker!!.map = naverMap
 //                약속 장소도 새 좌표로 설정ㅅ
                 mSeletedLatLng = latLng
+
+                val myODsayService = ODsayService.init(mContext, "gw9m7KtTSb97PJwg3C/jQx+OKMjdKmugQKqgeBp44Vk" )
+
+                myODsayService.requestSearchPubTransPath(
+                    coord.longitude.toString(),
+                    coord.latitude.toString(),
+                    latLng.longitude.toString(),
+                    latLng.latitude.toString(),
+                    null,
+                    null,
+                    null,
+                    object : OnResultCallbackListener {
+                        override fun onSuccess(p0: ODsayData?, p1: API?) {
+                            val jsonObj = p0!!.json!!
+                            Log.d("길찾기응답", jsonObj.toString())
+
+                            val resultObj = jsonObj.getJSONObject("result")
+                            Log.d("result", resultObj.toString())
+
+                            val pathArr = resultObj.getJSONArray("path") // 여러 추천 경로 중 첫번째 만 사용해보자.
+
+                            val firstPathObj = pathArr.getJSONObject(0) // 무조건 0 번째 경로 추출.
+                            Log.d("첫번째경로", firstPathObj.toString())
+
+                            val infoObj = firstPathObj.getJSONObject("info")
+                            
+                            val totalTime = infoObj.getInt("totalTime")
+                            val payment = infoObj.getInt("payment")
+
+//                            네이버 지도 라이브러리 이용
+                            val infoWindow = InfoWindow()
+                            infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext) {
+                                override fun getText(p0: InfoWindow): CharSequence {
+                                    return "이동시간 : ${totalTime}분, 비용 : ${payment}원"        
+                                }
+
+                            }
+                            infoWindow.open(marker!!)
+                            marker!!.setOnClickListener {
+                                if (marker!!.infoWindow == null) {
+                                    infoWindow.open(marker!!)
+                                }
+                                else {
+                                    infoWindow.close()
+                                }
+                                return@setOnClickListener true
+                            }
+
+                            val cameraUpdate = CameraUpdate.scrollTo(latLng)
+                            naverMap.moveCamera(cameraUpdate)
+                        }
+
+                        override fun onError(p0: Int, p1: String?, p2: API?) {
+                        }
+
+                    }
+                )
+                if (path == null) {
+                    path = PathOverlay()
+                }
+
+                val coordList = ArrayList<LatLng>()
+
+                coordList.add(coord)
+                coordList.add(latLng)
+
+                path!!.coords = coordList
+
+                path!!.map = naverMap
+
             }
-            
+
 
         }
 
