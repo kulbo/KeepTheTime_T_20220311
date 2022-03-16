@@ -9,6 +9,10 @@ import androidx.databinding.DataBindingUtil
 import kr.co.smartsoft.keepthetime_t_20220311.EditAppointmentActivity
 import kr.co.smartsoft.keepthetime_t_20220311.R
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.FragmentAppointmentListBinding
+import kr.co.smartsoft.keepthetime_t_20220311.datas.BasicResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AppointmentListFragment : BaseFragment() {
 
@@ -38,5 +42,18 @@ class AppointmentListFragment : BaseFragment() {
 
     override fun setValues() {
 
+    }
+
+    fun getAppointmentListFromServer() {
+        apiList.getRequestAppointmentList("date").enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
     }
 }

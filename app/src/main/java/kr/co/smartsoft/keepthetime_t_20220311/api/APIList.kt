@@ -73,4 +73,10 @@ interface APIList {
         @Field("latitude") latitude : Double,
         @Field("longtitude") longtitute : Double,
     ) : Call<BasicResponse>
+
+    //    내 친구 목록 조회하기
+    @GET("/user/friend")
+    fun getRequestAppointmentList(
+        @Query("date") date : String
+    ) : Call<BasicResponse>
 }
