@@ -29,7 +29,8 @@ class ViewMapActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_map)
         mAppointment = intent.getSerializableExtra("appointment") as AppointmentData
-
+        setUpEvents()
+        setValues()
     }
 
     override fun setUpEvents() {
@@ -51,12 +52,12 @@ class ViewMapActivity : BaseActivity() {
 
             val stationList = ArrayList<LatLng>()
 
-            stationList.add(LatLng(mAppointment.start_latitude, mAppointment.start_longtitude))
+            stationList.add(LatLng(mAppointment.start_latitude, mAppointment.start_longitude))
 
             val myODsayService = ODsayService.init(mContext, "gw9m7KtTSb97PJwg3C/jQx+OKMjdKmugQKqgeBp44Vk")
 
             myODsayService.requestSearchPubTransPath(
-                mAppointment.start_longtitude.toString(),
+                mAppointment.start_longitude.toString(),
                 mAppointment.start_latitude.toString(),
                 mAppointment.longitude.toString(),
                 mAppointment.latitude.toString(),

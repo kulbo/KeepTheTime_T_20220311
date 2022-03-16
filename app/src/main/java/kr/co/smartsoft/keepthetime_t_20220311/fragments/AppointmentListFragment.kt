@@ -55,14 +55,15 @@ class AppointmentListFragment : BaseFragment() {
         binding.appointmentRecyclerView.adapter = mAppointmentAdapter
         binding.appointmentRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
-        getAppointmentListFromServer()
+//        getAppointmentListFromServer()
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//
-//        getAppointmentListFromServer()
-//    }
+    // 화면이 사용자에게 보여질때 실행됨
+    override fun onResume() {
+        super.onResume()
+
+        getAppointmentListFromServer()
+    }
 
     fun getAppointmentListFromServer() {
         apiList.getRequestAppointmentList().enqueue(object : Callback<BasicResponse> {

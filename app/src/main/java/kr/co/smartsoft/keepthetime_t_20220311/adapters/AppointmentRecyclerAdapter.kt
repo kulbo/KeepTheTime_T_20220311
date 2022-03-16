@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import kr.co.smartsoft.keepthetime_t_20220311.R
 import kr.co.smartsoft.keepthetime_t_20220311.ViewMapActivity
 import kr.co.smartsoft.keepthetime_t_20220311.datas.AppointmentData
-import kr.co.smartsoft.keepthetime_t_20220311.datas.UserData
 import java.text.SimpleDateFormat
 
 class AppointmentRecyclerAdapter(
@@ -49,7 +47,7 @@ class AppointmentRecyclerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.apointment_list_item, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.appointment_list_item, parent, false)
         return MyViewHolder(view)
     }
 
