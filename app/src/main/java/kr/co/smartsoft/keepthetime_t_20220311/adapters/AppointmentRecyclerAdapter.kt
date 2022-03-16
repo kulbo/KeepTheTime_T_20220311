@@ -32,7 +32,7 @@ class AppointmentRecyclerAdapter(
             txtTitle.text = data.title
             txtPlaceName.text = data.place
 
-            // AppointmentData.datetime 의 Format 은 datetime format 이어야 한다.
+            // AppointmentData.datetime 의 Format 은 date format 이어야 한다.
             val sdf = SimpleDateFormat("yy년 M월 d일 a h시 m분")
             txtDateTime.text = sdf.format(data.datetime)
 
