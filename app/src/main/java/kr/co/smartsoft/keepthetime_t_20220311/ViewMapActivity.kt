@@ -2,7 +2,11 @@ package kr.co.smartsoft.keepthetime_t_20220311
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -115,11 +119,22 @@ class ViewMapActivity : BaseActivity() {
 
 //                        정보창에
                         val infoWindow = InfoWindow()
-                        infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext) {
-                            override fun getText(p0: InfoWindow): CharSequence {
-                                return infoStr
-                            }
+                        infoWindow.adapter = object : InfoWindow.DefaultViewAdapter(mContext) {
+                            override fun getContentView(p0: InfoWindow): View {
+                                val view = LayoutInflater.from(mContext)
+                                    .inflate(R.layout.destination_info_window, null)
 
+                                val txtPlaceName = view.findViewById<TextView>(R.id.txtPlaceName)
+                                val txtMoveTime = view.findViewById<TextView>(R.id.txtMoveTime)
+                                val txtPayment = view.findViewById<TextView>(R.id.txtPayment)
+
+                                txtPlaceName.text = mAppointment.place
+
+                                txtMoveTime.text = "${minutes}분 소요"
+                                txtPayment.text = "${payment}원 필요"
+
+                                return view
+                            }
                         }
                         infoWindow.open(marker)
                     }

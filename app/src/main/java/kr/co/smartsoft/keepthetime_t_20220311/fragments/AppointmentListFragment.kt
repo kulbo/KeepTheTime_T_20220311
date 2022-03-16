@@ -51,18 +51,18 @@ class AppointmentListFragment : BaseFragment() {
 
     override fun setValues() {
 
-//        getAppointmentListFromServer()
-
         mAppointmentAdapter = AppointmentRecyclerAdapter(mContext, mAppointmentList)
         binding.appointmentRecyclerView.adapter = mAppointmentAdapter
         binding.appointmentRecyclerView.layoutManager = LinearLayoutManager(mContext)
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         getAppointmentListFromServer()
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//
+//        getAppointmentListFromServer()
+//    }
 
     fun getAppointmentListFromServer() {
         apiList.getRequestAppointmentList().enqueue(object : Callback<BasicResponse> {
