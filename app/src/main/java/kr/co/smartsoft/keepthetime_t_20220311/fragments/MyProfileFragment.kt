@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import kr.co.smartsoft.keepthetime_t_20220311.ManageMyFriendsActivity
+import kr.co.smartsoft.keepthetime_t_20220311.ManagePlacesActivity
 import kr.co.smartsoft.keepthetime_t_20220311.R
 import kr.co.smartsoft.keepthetime_t_20220311.SplashActivity
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.FragmentMyProfileBinding
@@ -41,6 +42,10 @@ class MyProfileFragment : BaseFragment() {
 
     override fun setupEvents() {
 
+        binding.btnManagePlaces.setOnClickListener {
+            val myIntent = Intent(mContext, ManagePlacesActivity::class.java)
+            startActivity(myIntent)
+        }
         binding.btnManageMyFrients.setOnClickListener {
             val myIntent = Intent(mContext, ManageMyFriendsActivity::class.java)
             startActivity(myIntent)
