@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.overlay.Marker
 import kr.co.smartsoft.keepthetime_t_20220311.databinding.ActivityEditMyPlaceBinding
+import kr.co.smartsoft.keepthetime_t_20220311.datas.PlaceData
 
 class EditMyPlaceActivity : BaseActivity() {
     lateinit var binding : ActivityEditMyPlaceBinding
@@ -13,6 +14,8 @@ class EditMyPlaceActivity : BaseActivity() {
     var mSelectedPoint : LatLng? = null
 
     var marker : Marker? = null
+
+    var mStartPlace : ArrayList<PlaceData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,5 +43,9 @@ class EditMyPlaceActivity : BaseActivity() {
             }
         }
 
+    }
+
+    fun getMyStartPlaceListFromServer() {
+        apiList.getRequestMyPlaceList().enqueue()
     }
 }

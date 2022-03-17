@@ -80,7 +80,8 @@ interface APIList {
 
     // 내 장소 목록
     @GET("/user/place")
-    fun getRequestMyPlaces() : Call<BasicResponse>
+    fun getRequestMyPlaceList() : Call<BasicResponse>
+
 
     @FormUrlEncoded
     @POST("/user/place")
