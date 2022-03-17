@@ -77,4 +77,18 @@ interface APIList {
     //    내 친구 목록 조회하기
     @GET("/appointment")
     fun getRequestAppointmentList() : Call<BasicResponse>
+
+    // 내 장소 목록
+    @GET("/user/place")
+    fun getRequestMyPlaces() : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @POST("/user/place")
+    fun postRequestAddMyPlace(
+        @Field("name") name: String,
+        @Field("latitude") lat :Double,
+        @Field("longitude") lng: Double,
+        @Field("is_primary") isPrimary : Boolean
+
+    ) : Call<BasicResponse>
 }
