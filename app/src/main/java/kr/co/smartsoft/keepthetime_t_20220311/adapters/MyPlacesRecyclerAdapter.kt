@@ -23,9 +23,11 @@ class MyPlacesRecyclerAdapter(
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+        val txtStartPlace = view.findViewById<TextView>(R.id.txtStartPlaceName)
+
         fun bind(data : PlaceData) {
 
-
+            txtStartPlace.text = data.name
         }
 
     }

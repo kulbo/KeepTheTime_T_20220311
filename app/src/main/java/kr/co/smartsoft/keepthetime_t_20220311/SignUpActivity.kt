@@ -27,24 +27,23 @@ class SignUpActivity : BaseActivity() {
         binding.btnEmailCheck.setOnClickListener {
             val inputEmail = binding.edtEmail.text.toString()
 
-            apiList.getRequestDuplicatedCheck("EMAIL", inputEmail).equals(object : Callback<BasicResponse>{
-                override fun onResponse(
-                    call: Call<BasicResponse>,
-                    response: Response<BasicResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(mContext, "사용해도 좋은 이메일입니다.", Toast.LENGTH_SHORT).show()
-                    }
-                    else {
-                        Toast.makeText(mContext, "다른 이메일을 사용해주세요", Toast.LENGTH_SHORT).show()
-                    }
-                }
+           apiList.getRequestDuplicatedCheck("EMAIL",inputEmail).enqueue(object : Callback<BasicResponse> {
+               override fun onResponse(
+                   call: Call<BasicResponse>,
+                   response: Response<BasicResponse>
+               ) {
+                   if(response.isSuccessful) {
+                       Toast.makeText(mContext, "사용해도 좋은 아이디 입니다.", Toast.LENGTH_SHORT).show()
+                   } else {
+                       Toast.makeText(mContext, "다른 아이디를 사용하세요.", Toast.LENGTH_SHORT).show()
+                   }
+               }
 
-                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+               override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
-                }
+               }
 
-            })
+           })
         }
 
         binding.btnSignUp.setOnClickListener {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/txtStartPlanceName"
+        android:id="@+id/txtStartPlaceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
