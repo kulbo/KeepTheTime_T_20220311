@@ -23,18 +23,15 @@ class MyPlacesRecyclerAdapter(
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val txtStartPlaceName = view.findViewById<TextView>(R.id.txtStartPlanceName)
-
         fun bind(data : PlaceData) {
 
-            txtStartPlaceName.text = data.name
 
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.appointment_list_item, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.my_place_list_item, parent, false)
         return MyViewHolder(view)
     }
 
