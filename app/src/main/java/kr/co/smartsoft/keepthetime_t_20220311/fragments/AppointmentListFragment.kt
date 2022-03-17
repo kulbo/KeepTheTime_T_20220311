@@ -50,12 +50,12 @@ class AppointmentListFragment : BaseFragment() {
     }
 
     override fun setValues() {
+//        getAppointmentListFromServer()
 
         mAppointmentAdapter = AppointmentRecyclerAdapter(mContext, mAppointmentList)
         binding.appointmentRecyclerView.adapter = mAppointmentAdapter
         binding.appointmentRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
-//        getAppointmentListFromServer()
     }
 
     // 화면이 사용자에게 보여질때 실행됨
