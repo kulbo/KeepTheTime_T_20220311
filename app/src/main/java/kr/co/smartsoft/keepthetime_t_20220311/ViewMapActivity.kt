@@ -41,14 +41,14 @@ class ViewMapActivity : BaseActivity() {
         binding.naverMapView.getMapAsync {
             val naverMap = it
             val destLatLng = LatLng(mAppointment.latitude, mAppointment.longitude)
+//            도착지로 카메라 이동
             val cameraUpdate = CameraUpdate.scrollTo(destLatLng)
             naverMap.moveCamera(cameraUpdate)
 
+//            도착지 표시
             val marker = Marker()
             marker.position = destLatLng
             marker.map = naverMap
-
-            val path = PathOverlay()
 
             val stationList = ArrayList<LatLng>()
 
@@ -84,7 +84,7 @@ class ViewMapActivity : BaseActivity() {
 
                         for (i in 0 until subPathArr.length()) {
                             val subPathObj = subPathArr.getJSONObject(i)
-                            if (subPathObj.isNull("passStopList")) {
+                            if (!subPathObj.isNull("passStopList")) {
 //                                도보가 아니어서 정거장 모록을 주는 경우
                                 val passStopListObj = subPathObj.getJSONObject("passStopList")
                                 val stationsArr = passStopListObj.getJSONArray("stations")

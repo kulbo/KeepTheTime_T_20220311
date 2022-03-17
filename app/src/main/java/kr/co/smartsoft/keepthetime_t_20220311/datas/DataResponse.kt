@@ -13,6 +13,6 @@ class DataResponse(
 
     val appointments: List<AppointmentData>,    // 약속목록을 가져온다.
 
+    val places: List<PlaceData>,
 ) {
-
 }
