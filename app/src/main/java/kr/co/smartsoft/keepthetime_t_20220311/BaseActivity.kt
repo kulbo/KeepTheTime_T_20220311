@@ -24,20 +24,23 @@ abstract class BaseActivity : AppCompatActivity() {
         val retrofit = ServerAPI.getRetrofit(mContext)
         apiList = retrofit.create(APIList::class.java)      // apiList의 양식에 retrofit의 통신기능 사용할 수 있도록 연결
 
-//        supportActionBar?.let {
-//            setCustomActionBar()
-//        }
+        supportActionBar?.let {
+            setCustomActionBar()
+        }
     }
     abstract fun setUpEvents()
     abstract fun setValues()
 
-//    fun setCustomActionBar() {
-//        val defaultActionBar = supportActionBar!!
-//
-//        // defaultActionBar.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-//        defaultActionBar.setCustomView(R.layout.my_custom_action_bar)
-//
-//        val toolbar = defaultActionBar.customView.parent as Toolbar
-//
-//    }
+    fun setCustomActionBar() {
+        val defaultActionBar = supportActionBar!!
+
+        // defaultActionBar.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        defaultActionBar.setDisplayShowCustomEnabled(true)
+
+        defaultActionBar.setCustomView(R.layout.my_custom_action_bar)
+
+        val toolbar = defaultActionBar.customView.parent as androidx.appcompat.widget.Toolbar
+
+        toolbar.setContentInsetsAbsolute(0, 0)
+    }
 }
